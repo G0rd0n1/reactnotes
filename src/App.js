@@ -1,10 +1,11 @@
 import React from 'react';
+import NoteContainer from './Components/NoteContainer/NoteContainer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>In Progress</h1>
+      <NoteContainer />
     </div>
   );
 }
