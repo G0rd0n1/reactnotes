@@ -6,40 +6,35 @@ import './App.css';
 
 function App() {
 
-  const [notes, setNotes] = useState([
-    {
-      text:"Hello World",
-      time:"3:12PM",
-      color:"cyan"
-    },
-
-    {
-      text:"rgrgrgr",
-      time:"3:24PM",
-      color:"yellow"
-    },
-
-    {
-      text:"dfbfbergerg",
-      time:"3:35PM",
-      color:"green"
-    },
-
-    {
-      text:"Bye World",
-      time:"3:44PM",
-      color:"blue"
-    },
-  ])
+  const [notes, setNotes] = useState([]);
 
   const addNote=(color)=>{
-    const tempNotes=[...notes]
-    
+    const tempNotes=[...notes];
+
+    tempNotes.push({
+      id:Date.now() + "" + Math.floor(Math.random() * 78),
+      text:"",
+      time:Date.now(),
+      color,
+    });
+    setNotes(tempNotes);
   }
+
+  const deleteNote = (id) => {
+    const tempNotes = [...notes];
+
+    const index = tempNotes.findIndex((item) => item.id === id);
+    if (index < 0) return;
+
+    tempNotes.splice(index, 1);
+    setNotes(tempNotes);
+
+  }
+
   return (
     <div className="App">
       <Sidebar addNote={addNote}/>
-      <NoteContainer notes={notes}/>
+      <NoteContainer notes={notes} deleteNote={deleteNote}/>
     </div>
   );
 }

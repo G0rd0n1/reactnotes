@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import PlusIcon from '../../assets/add_circle_large.svg';
-import DeleteIcon from '../../assets/delete_small.svg';
 
 import './Sidebar.css';
 function Sidebar(props) {
