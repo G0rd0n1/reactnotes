@@ -1,5 +1,5 @@
-import { colors } from '@mui/material';
-import React from 'react'
+import React from 'react';
+import './Sidebar.css';
 import PlusIcon from '../../assets/add_circle_large.svg';
 import DeleteIcon from '../../assets/delete_svg.svg';
 

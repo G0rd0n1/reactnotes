@@ -1,5 +1,18 @@
-.plus {
-    height: 200
-    width: 50px;
-    cursor: pointer;
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sidebar_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.sidebar_list_item {
+    border-radius: 50%;
+    height: 26px;
+    width: 26px;
 }
