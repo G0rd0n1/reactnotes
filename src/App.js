@@ -1,42 +1,86 @@
-import React, { useState } from 'react';
-import NoteContainer from './Components/NoteContainer/NoteContainer';
-import Sidebar from './Components/Sidebar/Sidebar';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
+import NotesList from './Components/Notes/NoteList';
+import Search from './Components/Search/Search';
+import Header from './Components/Header/Header';
+import "./App.css";
 
+const App = () => {
+	const [notes, setNotes] = useState([
+		{
+			id: nanoid(),
+			text: 'This is my first note!',
+			date: '15/04/2021',
+		},
+		{
+			id: nanoid(),
+			text: 'This is my second note!',
+			date: '21/04/2021',
+		},
+		{
+			id: nanoid(),
+			text: 'This is my third note!',
+			date: '28/04/2021',
+		},
+		{
+			id: nanoid(),
+			text: 'This is my new note!',
+			date: '30/04/2021',
+		},
+	]);
 
-function App() {
+	const [searchText, setSearchText] = useState('');
 
-  const [notes, setNotes] = useState([]);
+	const [darkMode, setDarkMode] = useState(false);
 
-  const addNote=(color)=>{
-    const tempNotes=[...notes];
+	useEffect(() => {
+		const savedNotes = JSON.parse(
+			localStorage.getItem('react-notes-app-data')
+		);
 
-    tempNotes.push({
-      id:Date.now() + "" + Math.floor(Math.random() * 78),
-      text:"",
-      time:Date.now(),
-      color,
-    });
-    setNotes(tempNotes);
-  }
+		if (savedNotes) {
+			setNotes(savedNotes);
+		}
+	}, []);
 
-  const deleteNote = (id) => {
-    const tempNotes = [...notes];
+	useEffect(() => {
+		localStorage.setItem(
+			'react-notes-app-data',
+			JSON.stringify(notes)
+		);
+	}, [notes]);
 
-    const index = tempNotes.findIndex((item) => item.id === id);
-    if (index < 0) return;
+	const addNote = (text) => {
+		const date = new Date();
+		const newNote = {
+			id: nanoid(),
+			text: text,
+			date: date.toLocaleDateString(),
+		};
+		const newNotes = [...notes, newNote];
+		setNotes(newNotes);
+	};
 
-    tempNotes.splice(index, 1);
-    setNotes(tempNotes);
+	const deleteNote = (id) => {
+		const newNotes = notes.filter((note) => note.id !== id);
+		setNotes(newNotes);
+	};
 
-  }
-
-  return (
-    <div className="App">
-      <Sidebar addNote={addNote}/>
-      <NoteContainer notes={notes} deleteNote={deleteNote}/>
-    </div>
-  );
-}
+	return (
+		<div className={`${darkMode && 'dark-mode'}`}>
+			<div className='container'>
+				<Header handleToggleDarkMode={setDarkMode} />
+				<Search handleSearchNote={setSearchText} />
+				<NotesList
+					notes={notes.filter((note) =>
+						note.text.toLowerCase().includes(searchText)
+					)}
+					handleAddNote={addNote}
+					handleDeleteNote={deleteNote}
+				/>
+			</div>
+		</div>
+	);
+};
 
 export default App;
