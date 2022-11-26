@@ -6,28 +6,9 @@ import Header from './Components/Header/Header';
 import "./App.css";
 
 const App = () => {
-	const [notes, setNotes] = useState([
-		{
-			id: nanoid(),
-			text: 'This is my first note!',
-			date: '15/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my second note!',
-			date: '21/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my third note!',
-			date: '28/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my new note!',
-			date: '30/04/2021',
-		},
-	]);
+	const [notes, setNotes] = useState(
+		JSON.parse(localStorage.getItem('reactnotes')) || []
+	);
 
 	const [searchText, setSearchText] = useState('');
 
@@ -35,7 +16,7 @@ const App = () => {
 
 	useEffect(() => {
 		const savedNotes = JSON.parse(
-			localStorage.getItem('react-notes-app-data')
+			localStorage.getItem('reactnotes')
 		);
 
 		if (savedNotes) {
@@ -45,7 +26,7 @@ const App = () => {
 
 	useEffect(() => {
 		localStorage.setItem(
-			'react-notes-app-data',
+			'reactnotes',
 			JSON.stringify(notes)
 		);
 	}, [notes]);
