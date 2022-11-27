@@ -3,6 +3,8 @@ import { nanoid } from 'nanoid';
 import NotesList from './Components/NoteList/NoteList';
 import Search from './Components/Search/Search';
 import Header from './Components/Header/Header';
+import LoginForm from './Components/LoginForm/LoginForm';
+import {Routes, Route} from 'react-router-dom';
 import "./App.css";
 
 const App = () => {
@@ -48,19 +50,31 @@ const App = () => {
 	};
 
 	return (
-		<div className={`${darkMode && 'dark-mode'}`}>
-			<div className='container'>
-				<Header handleToggleDarkMode={setDarkMode} />
-				<Search handleSearchNote={setSearchText} />
-				<NotesList
-					notes={notes.filter((note) =>
-						note.text.toLowerCase().includes(searchText)
-					)}
-					handleAddNote={addNote}
-					handleDeleteNote={deleteNote}
-				/>
+		<>
+			<div className={`${darkMode && 'dark-mode'}`}>
+				<div className='container'>
+					<Routes>
+						<Route 
+							path = '/notes' 
+							element = {
+								<>
+									<Header handleToggleDarkMode={setDarkMode} />
+									<Search handleSearchNote={setSearchText} />
+									<NotesList
+										notes={notes.filter((note) =>
+											note.text.toLowerCase().includes(searchText)
+										)}
+										handleAddNote={addNote}
+										handleDeleteNote={deleteNote}
+									/>
+								</>
+							}
+						/>
+						<Route path='Login' element={<LoginForm />} />
+					</Routes>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

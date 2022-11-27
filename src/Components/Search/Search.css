@@ -2,8 +2,8 @@
 	display: flex;
 	align-items: center;
 	background-color: rgb(233, 233, 233);
-	border-radius: 10px;
-	padding: 5px;
+	border-radius: px;
+	padding: 8px;
 	margin-bottom: 1.5em;
 }
 
@@ -16,3 +16,4 @@
 .search input:focus {
 	outline: none;
 }
+

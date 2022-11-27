@@ -2,10 +2,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 40px 10px;
 }
 
 .dark-mode {
-	background-color: black;
+	background-color: rgb(0, 0, 0);
 }
 
 .dark-mode h1 {
