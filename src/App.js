@@ -1,13 +1,18 @@
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 import NotesList from './Components/NoteList/NoteList';
 import Search from './Components/Search/Search';
 import Header from './Components/Header/Header';
-import LoginForm from './Components/LoginForm/LoginForm';
-import {Routes, Route} from 'react-router-dom';
+import Login from './Components/Registration/Login';
+import Home from './Components/Registration/Home';
+import ProtectedRoute from './Components/context/ProtectedRoute';
+
+
+import { Routes, Route} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import "./App.css";
 
 const App = () => {
+
 	const [notes, setNotes] = useState(
 		JSON.parse(localStorage.getItem('reactnotes')) || []
 	);
@@ -54,10 +59,26 @@ const App = () => {
 			<div className={`${darkMode && 'dark-mode'}`}>
 				<div className='container'>
 					<Routes>
+
+						<Route 
+							path='/login' 
+							element = {
+								<Login />
+							}
+						/>
+
+						<Route 
+							path='/' 
+							element = {
+								<Home />
+							}
+						/>
+
 						<Route 
 							path = '/notes' 
 							element = {
 								<>
+								<ProtectedRoute>
 									<Header handleToggleDarkMode={setDarkMode} />
 									<Search handleSearchNote={setSearchText} />
 									<NotesList
@@ -67,10 +88,10 @@ const App = () => {
 										handleAddNote={addNote}
 										handleDeleteNote={deleteNote}
 									/>
+								</ProtectedRoute>
 								</>
 							}
 						/>
-						<Route path='Login' element={<LoginForm />} />
 					</Routes>
 				</div>
 			</div>

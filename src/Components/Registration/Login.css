@@ -1,0 +1,53 @@
+.cover {
+    background-color: white;
+    width: 30em;
+    height: 35em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(100, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 4%;
+    margin-left: 25%;
+}
+
+.cover:hover {
+    background-color: #02EB7E;
+}
+
+.heading {
+    justify-content: center;
+    align-items: center;
+    padding-left: 40%;
+}
+
+input{
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 4em;
+    width: 88%;
+    border-radius: 0.25em;
+    text-align: center;
+    justify-content: center;
+    margin: 2em;
+}
+
+input:focus {
+    outline-color: rgb(100, 156, 156);
+}
+
+.Button {
+    background: #FFD369;
+    border-radius: 5px;
+    border: none;
+    font-size: 10px;
+    padding: 10px 20px;
+    font-family: monospace;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    margin-left: 42%;
+}
